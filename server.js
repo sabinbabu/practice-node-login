@@ -13,6 +13,10 @@ app.get("/signup", (req, res) => {
   res.sendFile(`${_dirname}/signup.html`);
 });
 
+app.get("/login", (req, res) => {
+  res.sendFile(`${_dirname}/login.html`);
+});
+
 app.listen(PORT, (error) => {
   error
     ? console.log(error)
