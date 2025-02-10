@@ -32,6 +32,24 @@ app.post("/signup", (req, res) => {
   });
 });
 
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  const userResponse = email + "|" + password;
+  const dataFile = _dirname + "/dataFile.csv";
+
+  fs.readFile(dataFile, (error, data) => {
+    if (error) {
+      return res.send(error.message);
+    }
+    const fileResponse = data.toString();
+    fileResponse.includes(userResponse)
+      ? res.send("<p>Logged in successfully</p>")
+      : res.send(
+          "<p>Your credentials did not match, please try again <a href='/login'>Login</a></p>"
+        );
+  });
+});
+
 app.listen(PORT, (error) => {
   error
     ? console.log(error)
